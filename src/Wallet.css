@@ -1,0 +1,156 @@
+.main {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.wallet {
+  background-color: white;
+}
+
+.wallet-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.wallet-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.wallet-heading {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+#piWalletForm {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.wallet-textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: vertical;
+  font-family: Arial, sans-serif;
+}
+
+.wallet-textarea:focus {
+  border-color: #6A1B9A;
+  outline: none;
+  box-shadow: 0 0 5px rgba(106, 27, 154, 0.3);
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: left;
+}
+
+.wallet-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  border: none;
+  cursor: pointer;
+}
+
+.wallet-button-primary {
+  background-color: #6A1B9A;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.wallet-button-primary:hover {
+  background-color: #4A1270;
+}
+
+.wallet-button-block {
+  display: block;
+  width: 100%;
+}
+
+.wallet-button-margin {
+  margin-bottom: 15px;
+}
+
+.wallet-info {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+.wallet-info a {
+  color: #6A1B9A;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.wallet-info a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main {
+    padding: 20px 20px;
+  }
+
+  .wallet-heading {
+    font-size: 20px;
+  }
+
+  .wallet-textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .wallet-button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .wallet-info {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wallet-heading {
+    font-size: 18px;
+  }
+
+  .wallet-textarea {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .wallet-button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .wallet-info {
+    font-size: 12px;
+  }
+}
