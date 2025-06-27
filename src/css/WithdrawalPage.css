@@ -1,0 +1,81 @@
+/* Manual CSS for WithdrawalPage */
+.withdrawal-container {
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.withdrawal-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  text-align: center;
+  color: #333333;
+}
+
+.withdrawal-info {
+  margin-bottom: 16px;
+  text-align: center;
+  color: #666666;
+}
+
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-label {
+  display: block;
+  color: #555555;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.method-select, .upi-input, .account-input, .ifsc-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.method-select:focus, .upi-input:focus, .account-input:focus, .ifsc-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+.error-text {
+  color: #dc3545;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.success-text {
+  color: #28a745;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.verify-button {
+  width: 100%;
+  padding: 8px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.verify-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.verify-button:not(:disabled):hover {
+  background-color: #0056b3;
+}
