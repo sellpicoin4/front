@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/Phonepe.png'; // Replace with your logo path
+import logo from '../assets/phonepe.png'; // Replace with your logo path
 import '../css/Upipage.css';
 
 // Withdrawal Page component jo mock validation ke saath kaam karta hai
