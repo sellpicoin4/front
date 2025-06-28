@@ -7,11 +7,14 @@ function WithdrawalSuccessPage() {
   const { payoutId, amount } = state || {};
 
   return (
-    <div className="success-container">
-      <h1 className="success-title">Withdrawal Successful!</h1>
-      <p className="success-info">Your withdrawal of ₹{amount} has been processed.</p>
-      <p className="success-info">Transaction ID: {payoutId}</p>
-      <a href="/" className="home-button">Back to Home</a>
+    <div className="failed-container">
+      <div className="failed-box">
+        <h1 className="failed-title">Payment Failed!</h1>
+        <p className="failed-info">Your withdrawal of ₹{amount || 'N/A'} could not be processed.</p>
+        <p className="failed-info">Transaction ID: {payoutId || 'N/A'}</p>
+        <p className="failed-info">Please try again or contact support.</p>
+        <a href="/" className="home-button">Back to Home</a>
+      </div>
     </div>
   );
 }
