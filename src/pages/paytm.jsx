@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import logo from '../assets/paytm.png'; // Replace with your logo path
+import { useLocation, useNavigate } from 'react-router-dom';
+import logo from '../assets/paytm.png';
 import '../css/Upipage.css';
 
-// Withdrawal Page component jo mock validation ke saath kaam karta hai
-function Paytm({ quantity, totalAmount }) {
+function Paytm() {
   const navigate = useNavigate();
-  const [method, setMethod] = useState('upi'); // Default withdrawal method
+  const { state } = useLocation();
+  const { quantity, totalAmount, paymentMethod } = state || {};
+
+  const [method, setMethod] = useState('upi');
   const [upiId, setUpiId] = useState('');
   const [accountNo, setAccountNo] = useState('');
   const [ifsc, setIfsc] = useState('');
@@ -14,17 +16,14 @@ function Paytm({ quantity, totalAmount }) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Mock validation logic for UPI and Bank Account
   const validateDetails = () => {
     if (method === 'upi') {
-      // Basic UPI ID validation (example: something@something)
       const upiRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9]+$/;
       if (!upiId || !upiRegex.test(upiId)) {
         return 'Invalid UPI ID. Use format like example@upi';
       }
       return '';
     } else {
-      // Basic bank account validation (example: 10-16 digits for account number, valid IFSC format)
       const accountNoRegex = /^\d{10,16}$/;
       const ifscRegex = /^[A-Z]{4}0[A-Z0-9]{6}$/;
       if (!accountNo || !accountNoRegex.test(accountNo)) {
@@ -37,13 +36,11 @@ function Paytm({ quantity, totalAmount }) {
     }
   };
 
-  // Handle form submission with mock validation
   const handleSubmit = () => {
     setLoading(true);
     setError('');
     setAccountHolder('');
 
-    // Validate details
     const validationError = validateDetails();
     if (validationError) {
       setError(validationError);
@@ -51,16 +48,12 @@ function Paytm({ quantity, totalAmount }) {
       return;
     }
 
-    // Mock account holder name
     const mockAccountHolder = method === 'upi' ? `User (${upiId})` : `User (${accountNo})`;
     setAccountHolder(mockAccountHolder);
 
-    // Mock payout ID
     const mockPayoutId = `payout_${Math.random().toString(36).substr(2, 9)}`;
 
-    // Simulate processing delay
     setTimeout(() => {
-      // Navigate to withdrawal success page with mock details
       navigate('/CoinKey', {
         state: {
           quantity,
@@ -74,7 +67,7 @@ function Paytm({ quantity, totalAmount }) {
         },
       });
       setLoading(false);
-    }, 1000); // 1 second delay to mimic API call
+    }, 1000);
   };
 
   return (
@@ -85,7 +78,9 @@ function Paytm({ quantity, totalAmount }) {
             <img src={logo} alt="PiNet Logo" className="logo" />
             <h1 className="withdrawal-title">Withdrawal Details</h1>
           </div>
-          <p className="withdrawal-info">Quantity: {quantity} | Total Amount: ₹{totalAmount}</p>
+          <p className="withdrawal-info">
+            Quantity: {quantity} | Total Amount: ₹{totalAmount} | Payment Method: {paymentMethod}
+          </p>
           <div className="input-group">
             <label className="input-label">Withdrawal Method</label>
             <select
@@ -143,8 +138,8 @@ function Paytm({ quantity, totalAmount }) {
           </button>
         </div>
       </div>
-      </div>
-      );
+    </div>
+  );
 }
 
       export default Paytm;

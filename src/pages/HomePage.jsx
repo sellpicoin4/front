@@ -1,32 +1,20 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/pi-logo.png'; // Replace with your logo path
-import upi from '../assets/upi.png'; // Replace with your UPI icon path
-import gpay from '../assets/gpay.png'; // Replace with your Google Pay icon path
-import phonepe from '../assets/phonepe.png'; // Replace with your PhonePe icon path
-import bhim from '../assets/bhim.png'; // Replace with your BHIM icon path
-import cred from '../assets/cred.png'; // Replace with your CRED icon path
-import paytm from '../assets/paytm.png'; // Replace with your Paytm icon path
+import logo from '../assets/pi-logo.png';
+import upi from '../assets/upi.png';
+import gpay from '../assets/gpay.png';
+import phonepe from '../assets/phonepe.png';
+import bhim from '../assets/bhim.png';
+import cred from '../assets/cred.png';
+import paytm from '../assets/paytm.png';
 import '../css/HomePage.css';
 
-// HomePage component jo Pi coins sell karne ka form aur payment methods dikhata hai
 function HomePage({ quantity, setQuantity, totalAmount, setTotalAmount }) {
   const [paymentMethod, setPaymentMethod] = useState('');
 
-  // Handle payment method selection
-  const handlePaymentClick = (method) => {
-    if (!quantity || isNaN(quantity) || quantity <= 0) {
-      window.alert('Please enter a valid Pi quantity before selecting a payment method');
-      return;
-    }
-    setPaymentMethod(method);
-  };
-
-  // Handle Pi quantity input change
   const handlePiChange = (e) => {
     const pi = e.target.value;
     setQuantity(pi);
-    // Calculate payment: 1 Pi = 2200 rupees
     if (pi && !isNaN(pi)) {
       const amount = parseFloat(pi) * 2200;
       setTotalAmount(amount.toFixed(2));
@@ -35,13 +23,14 @@ function HomePage({ quantity, setQuantity, totalAmount, setTotalAmount }) {
     }
   };
 
-  // Handle Proceed to Payment click
   const handleProceedClick = (e) => {
     if (!quantity || isNaN(quantity) || quantity <= 0) {
-      e.preventDefault(); // Prevent navigation
+      e.preventDefault();
       window.alert('Please enter a valid Pi quantity to proceed');
     }
   };
+
+  const isQuantityValid = quantity && !isNaN(quantity) && quantity > 0;
 
   return (
     <div className="home-container">
@@ -83,6 +72,7 @@ function HomePage({ quantity, setQuantity, totalAmount, setTotalAmount }) {
           <Link
             to="/Upipage"
             className="submit-btn"
+            state={{ quantity, totalAmount, paymentMethod }}
             onClick={handleProceedClick}
           >
             Proceed to Payment
@@ -91,54 +81,35 @@ function HomePage({ quantity, setQuantity, totalAmount, setTotalAmount }) {
       </section>
 
       <section className="payment-icons">
-        <Link
-          to="/Upipage"
-          className="icon-container"
-          onClick={() => handlePaymentClick('UPI')}
-        >
-          <img src={upi} alt="UPI" className="payment-icon" />
-          <span>UPI</span>
-        </Link>
-        <Link
-          to="/Gpaypage"
-          className="icon-container"
-          onClick={() => handlePaymentClick('Google Pay')}
-        >
-          <img src={gpay} alt="Google Pay" className="payment-icon" />
-          <span>Google Pay</span>
-        </Link>
-        <Link
-          to="/Phonepepage"
-          className="icon-container"
-          onClick={() => handlePaymentClick('Phone Pay')}
-        >
-          <img src={phonepe} alt="Phone Pay" className="payment-icon" />
-          <span>Phone Pay</span>
-        </Link>
-        <Link
-          to="/Bhimpage"
-          className="icon-container"
-          onClick={() => handlePaymentClick('BHIM')}
-        >
-          <img src={bhim} alt="BHIM" className="payment-icon" />
-          <span>BHIM</span>
-        </Link>
-        <Link
-          to="/Credpage"
-          className="icon-container"
-          onClick={() => handlePaymentClick('CRED')}
-        >
-          <img src={cred} alt="CRED" className="payment-icon" />
-          <span>CRED</span>
-        </Link>
-        <Link
-          to="/Paytm"
-          className="icon-container"
-          onClick={() => handlePaymentClick('Paytm')}
-        >
-          <img src={paytm} alt="Paytm" className="payment-icon" />
-          <span>Paytm <img src={upi} alt="UPI" className="sub-icon" /></span>
-        </Link>
+        {[
+          { name: 'UPI', icon: upi, route: '/Upipage' },
+          { name: 'Google Pay', icon: gpay, route: '/Gpaypage' },
+          { name: 'Phone Pay', icon: phonepe, route: '/Phonepepage' },
+          { name: 'BHIM', icon: bhim, route: '/Bhimpage' },
+          { name: 'CRED', icon: cred, route: '/Credpage' },
+          { name: 'Paytm', icon: paytm, route: '/Paytm' },
+        ].map(({ name, icon, route }) => (
+          <Link
+            key={name}
+            to={isQuantityValid ? route : "#"}
+            state={{ quantity, totalAmount, paymentMethod: name }}
+            className={`icon-container ${!isQuantityValid ? 'disabled' : ''}`}
+            onClick={(e) => {
+              if (!isQuantityValid) {
+                e.preventDefault();
+                window.alert("Please enter Pi quantity before selecting a payment method");
+                return;
+              }
+              setPaymentMethod(name);
+            }}
+          >
+            <img src={icon} alt={name} className="payment-icon" />
+            <span>
+              {name}
+              {name === 'Paytm' && <img src={upi} alt="UPI" className="sub-icon" />}
+            </span>
+          </Link>
+        ))}
       </section>
     </div>
   );
