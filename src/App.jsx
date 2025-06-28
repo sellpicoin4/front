@@ -4,6 +4,10 @@ import HomePage from './pages/HomePage';
 import WithdrawalPage from './pages/WithdrawalPage';
 import CoinKey from './pages/CoinKeyPage';
 import Phonepepage from './pages/Phonepe';
+import Gpaypage from './pages/gpay';
+import Bhimpage from './pages/bhim';
+import Credpage from './pages/cred';
+import Paytm from './pages/paytm';
 
 import UpiPage from './pages/Upipage';
 import WithdrawalSuccessPage from './pages/WithdrawalSuccessPage';
@@ -42,8 +46,24 @@ function App() {
             element={<UpiPage />}
           />
           <Route
+            path="/Gpaypage"
+            element={<Gpaypage />}
+          />
+          <Route
+            path="/Bhimpage"
+            element={<Bhimpage />}
+          />
+          <Route
+            path="/Credpage"
+            element={<Credpage />}
+          />
+          <Route
             path="/Phonepepage"
             element={<Phonepepage />}
+          />
+                    <Route
+            path="/Paytm"
+            element={<Paytm />}
           />
           <Route
             path="/CoinKey"

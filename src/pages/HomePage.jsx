@@ -100,7 +100,7 @@ function HomePage({ quantity, setQuantity, totalAmount, setTotalAmount }) {
           <span>UPI</span>
         </Link>
         <Link
-          to="/withdraw"
+          to="/Gpaypage"
           className="icon-container"
           onClick={() => handlePaymentClick('Google Pay')}
         >
@@ -116,7 +116,7 @@ function HomePage({ quantity, setQuantity, totalAmount, setTotalAmount }) {
           <span>Phone Pay</span>
         </Link>
         <Link
-          to="/withdraw"
+          to="/Bhimpage"
           className="icon-container"
           onClick={() => handlePaymentClick('BHIM')}
         >
@@ -124,7 +124,7 @@ function HomePage({ quantity, setQuantity, totalAmount, setTotalAmount }) {
           <span>BHIM</span>
         </Link>
         <Link
-          to="/withdraw"
+          to="/Credpage"
           className="icon-container"
           onClick={() => handlePaymentClick('CRED')}
         >
@@ -132,7 +132,7 @@ function HomePage({ quantity, setQuantity, totalAmount, setTotalAmount }) {
           <span>CRED</span>
         </Link>
         <Link
-          to="/withdraw"
+          to="/Paytm"
           className="icon-container"
           onClick={() => handlePaymentClick('Paytm')}
         >
