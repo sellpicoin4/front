@@ -16,7 +16,7 @@ function HomePage({ quantity, setQuantity, totalAmount, setTotalAmount }) {
     const pi = e.target.value;
     setQuantity(pi);
     if (pi && !isNaN(pi)) {
-      const amount = parseFloat(pi) * 2200;
+      const amount = parseFloat(pi) * 3300;
       setTotalAmount(amount.toFixed(2));
     } else {
       setTotalAmount('');
